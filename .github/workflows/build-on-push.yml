@@ -79,8 +79,8 @@ jobs:
     
     - name: Deploy to Sandbox
       env:
-        USERNAME: ${{ secrets.anypoint_cicd_username }}
-        PASSWORD: ${{ secrets.anypoint_cicd_password }}
+        USERNAME: ashish-trial
+        PASSWORD: Apisero@2021
       run: |
         artifactName=$(ls *.jar | head -1)
         mvn deploy -DmuleDeploy \
