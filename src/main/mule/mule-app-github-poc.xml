@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<flow name="mule-app-github-pocFlow" doc:id="4ee3dc72-1f9b-4f17-a367-d62afd6f69fd" >
+		<http:listener doc:name="HTTP: GET/github" doc:id="e26eca8b-bc36-4990-b8c1-e6d04f4bc6e7" allowedMethods="GET" path="/github" config-ref="HTTP_Listener_config"/>
+		<set-payload value='#["This message is from app deployed with GitHub. v1"]' doc:name="Set Payload" doc:id="7f6f95eb-683f-4fc3-8264-ef2d94dfbcba" />
+		<ee:transform doc:name="Transform Message" doc:id="216957b4-990c-4273-93e5-2a26f4b3fc86" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+payload]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<logger level="INFO" doc:name="Logger" doc:id="fdddf33c-bdc9-43f0-b0a3-e6f08da8f3b6" message="#[payload]"/>
+	</flow>
+</mule>
