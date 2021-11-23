@@ -79,8 +79,8 @@ jobs:
     
     - name: Deploy to Sandbox
       env:
-        USERNAME: ashish-trial
-        PASSWORD: Apisero@2021
+        USERNAME: ${{ secrets.USERNAME }}
+        PASSWORD: ${{ secrets.PASSWORD }}
       run: |
         artifactName=$(ls *.jar | head -1)
         mvn deploy -DmuleDeploy \
